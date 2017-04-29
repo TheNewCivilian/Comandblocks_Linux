@@ -1,4 +1,4 @@
 CC = gcc
 
 all :
-	gcc  Comandblocks.c -lncurses 
+	gcc  main.c socket.c -lncurses 

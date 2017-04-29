@@ -12,8 +12,9 @@ Install
 Build under Linux:
 
 ```
-gcc main.c socket.c -lncurses
+make
 ```
+Buildoptions for Windows coming soon.
 
 
 Screenshots
