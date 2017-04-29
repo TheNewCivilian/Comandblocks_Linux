@@ -1,6 +1,12 @@
 #ifndef MAIN_H
 #define MAIN_H
 
+#ifdef __WIN32__
+#include <pdcurses.h>
+#else
+#include <ncurses.h>
+#endif
+
 #include "socket.h"
 
 int gameloop();

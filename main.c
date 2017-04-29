@@ -1,5 +1,5 @@
 
-#include <ncurses.h>
+
 #include <time.h>
 #include <stdio.h>
 #include <string.h>
@@ -7,6 +7,8 @@
 #include <ctype.h>
 #include "main.h"
 #include "socket.h"
+
+int offline = 0;
 
 int main(int argc, char const *argv[])
 {
@@ -67,7 +69,8 @@ int gameloop(){
     HSinput->playername[i] = (char *) calloc(30,sizeof(char));
   }
   if(checkscore(-1,(char *) " ",HSinput) != -1){
-    printf("Something fucked up!\n");
+    printf("Running Offline!\n");
+    offline = 1;
     return 1;
   }
   for(i = 0;i < max_x;i++){
@@ -232,16 +235,19 @@ int loopexit(int score,LIST * HSinput){
     setHighscore(score);
     refresh();
   }
-  enterplayername(player,max_x);
-  place = checkscore(score,player,HSinput);
-  if (place > -1){
-    attron(COLOR_PAIR(9));
-    mvprintw(10,(max_x/2)-15,"      New ONLINE Highscore!!      ");
-    attroff(COLOR_PAIR(9));
-    refresh();
+  if (offline == 0){
+    enterplayername(player,max_x);
+    place = checkscore(score,player,HSinput);
+    if (place > -1){
+      attron(COLOR_PAIR(9));
+      mvprintw(10,(max_x/2)-15,"      New ONLINE Highscore!!      ");
+      attroff(COLOR_PAIR(9));
+      refresh();
+    }
+
+    drawhscorelist(max_x,max_y,HSinput);
   }
 
-  drawhscorelist(max_x,max_y,HSinput);
 
   while(1 == 1){
     input = getchar();
