@@ -21,5 +21,7 @@ Screenshots
 -----------
 Main game frame:
 ![01](img/01.png)
+
 Online highscore list:
+
 ![02](img/02.png)
